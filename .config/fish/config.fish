@@ -8,3 +8,5 @@ export PATH="$PATH":"$HOME/.pub-cache/bin"
 alias ll="exa --long --header --icons $args"
 
 alias g="git $args" 
+
+alias flutter="fvm flutter $args"

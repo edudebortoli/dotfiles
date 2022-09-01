@@ -12,5 +12,6 @@ Plug 'cohama/lexima.vim'
 
 if has("nvim")
   Plug 'neovim/nvim-lspconfig'
+  Plug 'hoob3rt/lualine.nvim'
 endif
 call plug#end()
