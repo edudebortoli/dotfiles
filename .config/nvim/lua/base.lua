@@ -42,3 +42,6 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 
 -- Add asterisks in block Comments
 vim.opt.formatoptions:append { 'r' }
+
+-- Theme Config
+vim.cmd[[colorscheme tokyonight-night]]
