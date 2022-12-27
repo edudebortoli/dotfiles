@@ -10,6 +10,7 @@ packer.startup(function(use)
   use 'wbthomason/packer.nvim'
   -- Theme
   use 'folke/tokyonight.nvim'
+  use 'svrana/neosolarized.nvim'
   use 'xiyaowong/nvim-transparent'
   --Vim Status line
   use 'kyazdani42/nvim-web-devicons' -- File Icons
@@ -19,7 +20,6 @@ packer.startup(function(use)
   use 'hrsh7th/cmp-buffer' -- nvim-cmp source for buffer words
   use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in LSP
   use 'hrsh7th/nvim-cmp' -- Completion
-  use 'valloric/MatchTagAlways'
 
   use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
@@ -49,7 +49,8 @@ packer.startup(function(use)
     "iamcco/markdown-preview.nvim",
     run = function() vim.fn["mkdp#util#install"]() end,
   })
-
+	use("theprimeagen/harpoon")
+	use("mbbill/undotree")
 
 end)
 

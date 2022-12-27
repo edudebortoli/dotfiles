@@ -1,9 +1,5 @@
 vim.cmd('autocmd!')
 
-vim.scriptencoding = 'utf-8'
-vim.opt.encoding = 'utf-8'
-vim.opt.fileencoding = 'utf-8'
-
 vim.wo.number = true
 vim.wo.relativenumber = true
 
@@ -45,4 +41,4 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 vim.opt.formatoptions:append { 'r' }
 
 -- Theme Config
-vim.cmd[[colorscheme tokyonight]]
+vim.cmd[[colorscheme tokyonight-moon]]

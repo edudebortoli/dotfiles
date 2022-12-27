@@ -45,14 +45,14 @@ telescope.setup {
 
 telescope.load_extension("file_browser")
 
-vim.keymap.set('n', '<C-p>',
+vim.keymap.set('n', '<leader>pf',
   function()
     builtin.find_files({
       no_ignore = false,
       hidden = true
     })
   end)
-vim.keymap.set('n', ';r', function() -- find with live grep, file names and lines
+vim.keymap.set('n', '<leader>pg', function() -- find with live grep, file names and lines
   builtin.live_grep()
 end)
 vim.keymap.set('n', '\\\\', function()
@@ -67,7 +67,7 @@ end)
 vim.keymap.set('n', ';e', function()
   builtin.diagnostics()
 end)
-vim.keymap.set("n", "<C-b>", function() -- shows the file browser
+vim.keymap.set("n", "<leader>pv", function() -- shows the file browser
   telescope.extensions.file_browser.file_browser({
     path = "%:p:h",
     cwd = telescope_buffer_dir(),
