@@ -10,7 +10,10 @@ packer.startup(function(use)
   use 'wbthomason/packer.nvim'
   -- Theme
   use 'folke/tokyonight.nvim'
-  use 'svrana/neosolarized.nvim'
+  use {
+    'svrana/neosolarized.nvim',
+    requires = { 'tjdevries/colorbuddy.nvim' }
+  }
   use 'xiyaowong/nvim-transparent'
   --Vim Status line
   use 'kyazdani42/nvim-web-devicons' -- File Icons
