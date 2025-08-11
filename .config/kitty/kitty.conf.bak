@@ -1,0 +1,5 @@
+font_family "SpaceMono Nerd Font Mono"
+font-size 10
+font-feature -calt -dlig -liga
+hide_window_decorations yes
+background_opacity 0.9
