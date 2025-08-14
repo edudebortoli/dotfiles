@@ -1,0 +1,63 @@
+/* Monochrome Waybar (plain CSS, no variables) */
+* {
+	border: none;
+	border-radius: 0;
+	min-height: 0;
+	font-family: "SpaceMono Nerd Font Mono";
+	font-weight: bold;
+	font-size: 12px;
+	/* smaller */
+	padding: 0;
+}
+
+window#waybar {
+	background: #222222;
+	border-bottom: 2px solid #aaaaaa;
+}
+
+tooltip {
+	background-color: #222222;
+	border: 2px solid #aaaaaa;
+	color: #ffffff;
+}
+
+/* Modules */
+#clock,
+#tray,
+#cpu,
+#memory,
+#battery,
+#network,
+#pulseaudio {
+	margin: 4px 4px 4px 0;
+	padding: 2px 8px;
+	background-color: #222222;
+	border: 2px solid #aaaaaa;
+	color: #ffffff;
+}
+
+/* Workspaces */
+#workspaces {
+	background-color: #222222;
+	margin: 4px 0 4px 4px;
+	border: 2px solid #aaaaaa;
+}
+
+#workspaces button {
+	all: initial;
+	min-width: 0;
+	padding: 2px 4px;
+	color: #888888;
+	font-weight: bold;
+	font-family: "SpaceMono Nerd Font Mono";
+	font-size: 12px;
+}
+
+#workspaces button.focused {
+	background-color: #ffffff;
+	color: #000000;
+}
+
+#window {
+	margin-left: 10px;
+}
