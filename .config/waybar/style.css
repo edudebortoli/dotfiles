@@ -29,7 +29,7 @@ tooltip {
 #battery,
 #network,
 #pulseaudio {
-	margin: 4px 4px 4px 0;
+	margin: 4px 0px 0px 0;
 	padding: 2px 8px;
 	background-color: #222222;
 	border: 2px solid #aaaaaa;
@@ -39,23 +39,23 @@ tooltip {
 /* Workspaces */
 #workspaces {
 	background-color: #222222;
-	margin: 4px 0 4px 4px;
 	border: 2px solid #aaaaaa;
+	padding: 2px 4px;
 }
 
 #workspaces button {
 	all: initial;
 	min-width: 0;
 	padding: 2px 4px;
-	color: #888888;
+	color: #ffffff;
 	font-weight: bold;
 	font-family: "SpaceMono Nerd Font Mono";
 	font-size: 12px;
 }
 
-#workspaces button.focused {
+#workspaces button.active {
 	background-color: #ffffff;
-	color: #000000;
+	color: #222222;
 }
 
 #window {
