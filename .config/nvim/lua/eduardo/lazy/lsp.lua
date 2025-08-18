@@ -16,7 +16,7 @@ return {
 		"natebosch/vim-lsc-dart"
 	},
 	config = function()
-		vim.lsp.enable('dartls')
+		-- vim.lsp.enable('dartls')
 		local cmp = require("cmp")
 		local cmp_lsp = require("cmp_nvim_lsp")
 		local capabilities = vim.tbl_deep_extend(
@@ -55,6 +55,13 @@ return {
 								},
 							},
 						},
+					})
+				end,
+
+				["pyright"] = function()
+					local lspconfig = require("lspconfig")
+					lspconfig.pyright.setup({
+						capabilities = capabilities
 					})
 				end,
 
