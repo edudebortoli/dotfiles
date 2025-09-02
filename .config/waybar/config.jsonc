@@ -11,6 +11,7 @@
 		"hyprland/window"
 	],
 	"modules-center": [
+		"custom/swaync",
 		"clock"
 	],
 	"modules-right": [
@@ -81,4 +82,11 @@
 		"on-click": "pavucontrol",
 		"tooltip": false
 	},
+	"custom/swaync": {
+		"format": " {}",
+		"tooltip": false,
+		"exec": "swaync-client -sw",
+		"on-click": "swaync-client -t",
+		"interval": 2
+	}
 }
