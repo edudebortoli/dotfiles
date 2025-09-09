@@ -67,17 +67,22 @@ return {
 				end,
 
 				["html"] = function()
-					local lspconfig = require("lspconfig")
-					lspconfig.html.setup({
+					require("lspconfig").html.setup({
 						capabilities = capabilities,
-						filetypes = { "html", "htmldjango", "eruby", "htmlangular" }, -- extend if needed
+						on_attach = on_attach,
+						filetypes = { "html", "htmldjango", "eruby", "htmlangular" },
 						init_options = {
 							configurationSection = { "html", "css", "javascript" },
-							embeddedLanguages = {
-								css = true,
-								javascript = true,
-							},
+							embeddedLanguages = { css = true, javascript = true },
 							provideFormatter = true,
+						},
+						settings = {
+							html = {
+								format = {
+									wrapAttributes = "force-expand-multiline",
+									wrapLineLength = 0,
+								},
+							},
 						},
 					})
 				end,
