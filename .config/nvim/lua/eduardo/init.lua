@@ -1,7 +1,8 @@
 require("eduardo.remap")
 require("eduardo.options")
 require("eduardo.lazy_init")
-require("eduardo.open-env")
+require("eduardo.open_env")
+require("eduardo.json_to_env")
 vim.cmd([[colorscheme solarized-osaka]])
 
 function Hide()

@@ -42,6 +42,7 @@ return {
 				"lua_ls",
 				"eslint",
 				"ts_ls",
+				"html"
 			},
 			handlers = {
 				function(server_name) -- default handler (optional)
@@ -65,6 +66,56 @@ return {
 					})
 				end,
 
+				["html"] = function()
+					local lspconfig = require("lspconfig")
+					lspconfig.html.setup({
+						capabilities = capabilities,
+						filetypes = { "html", "htmldjango", "eruby", "htmlangular" }, -- extend if needed
+						init_options = {
+							configurationSection = { "html", "css", "javascript" },
+							embeddedLanguages = {
+								css = true,
+								javascript = true,
+							},
+							provideFormatter = true,
+						},
+					})
+				end,
+
+				["angularls"] = function()
+					local lspconfig = require("lspconfig")
+
+					-- Mason paths
+					local mason_registry = require("mason-registry")
+					local angularls_path = mason_registry.get_package("angular-language-server"):get_install_path()
+					local global_node_modules = angularls_path .. "/node_modules"
+
+					-- Project node_modules (if exists)
+					local project_root = lspconfig.util.root_pattern("angular.json", "project.json", "nx.json", "package.json",
+						".git")(vim.fn.getcwd()) or vim.fn.getcwd()
+					local project_node_modules = project_root .. "/node_modules"
+
+					-- Probe locations: prefer project, fallback to mason
+					local probe_locations = {}
+					if vim.fn.isdirectory(project_node_modules) == 1 then
+						table.insert(probe_locations, project_node_modules)
+					end
+					table.insert(probe_locations, global_node_modules)
+
+					lspconfig.angularls.setup({
+						capabilities = capabilities,
+						cmd = {
+							"ngserver",
+							"--stdio",
+							"--tsProbeLocations",
+							table.concat(probe_locations, ","),
+							"--ngProbeLocations",
+							table.concat(probe_locations, ","),
+						},
+						root_dir = lspconfig.util.root_pattern("angular.json", "project.json", "nx.json", "package.json", ".git"),
+					})
+				end,
+
 				["lua_ls"] = function()
 					local lspconfig = require("lspconfig")
 					lspconfig.lua_ls.setup({
@@ -81,6 +132,7 @@ return {
 				end,
 			},
 		})
+
 
 		local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
