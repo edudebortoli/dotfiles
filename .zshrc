@@ -107,6 +107,8 @@ source $ZSH/oh-my-zsh.sh
 alias vim="nvim"
 alias lg="lazygit"
 alias g="git"
+alias py="python3"
+alias python="python3"
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
@@ -122,3 +124,6 @@ export PATH="/home/eduardo/.fvm_flutter/bin:$PATH"
 [[ -f /home/eduardo/.dart-cli-completion/zsh-config.zsh ]] && . /home/eduardo/.dart-cli-completion/zsh-config.zsh || true
 ## [/Completion]
 
+
+# Created by `pipx` on 2025-08-25 23:06:25
+export PATH="$PATH:/home/eduardo/.local/bin"
