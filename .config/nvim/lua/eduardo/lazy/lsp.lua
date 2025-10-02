@@ -3,20 +3,11 @@ return {
 	dependencies = {
 		{ "williamboman/mason.nvim",           version = "^1.0.0" },
 		{ "williamboman/mason-lspconfig.nvim", version = "^1.0.0" },
-		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/cmp-buffer",
-		"hrsh7th/cmp-path",
-		"hrsh7th/cmp-cmdline",
 		"hrsh7th/nvim-cmp",
-		"L3MON4D3/LuaSnip",
-		"saadparwaiz1/cmp_luasnip",
-		"j-hui/fidget.nvim",
-		"dart-lang/dart-vim-plugin",
-		"natebosch/vim-lsc",
-		"natebosch/vim-lsc-dart"
+		"hrsh7th/cmp-nvim-lsp",
+		"nvimtools/none-ls.nvim", 
 	},
 	config = function()
-		-- vim.lsp.enable('dartls')
 		local cmp = require("cmp")
 		local cmp_lsp = require("cmp_nvim_lsp")
 		local capabilities = vim.tbl_deep_extend(
@@ -25,112 +16,23 @@ return {
 			vim.lsp.protocol.make_client_capabilities(),
 			cmp_lsp.default_capabilities()
 		)
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			buffer = buffer,
-			callback = function()
-				vim.lsp.buf.format { async = false }
-			end
-		})
 
-		require("fidget").setup({})
 		require("mason").setup()
 		require("mason-lspconfig").setup({
-			automatic_installation = false, -- or false if you prefer
-			-- ↓ add this line
-			automatic_setup = true,      -- explicitly disable auto-setup if needed
-			ensure_installed = {
-				"lua_ls",
-				"eslint",
-				"ts_ls",
-				"html"
-			},
+			ensure_installed = { "lua_ls", "eslint", "tsserver", "html" },
 			handlers = {
-				function(server_name) -- default handler (optional)
+				function(server_name)
 					require("lspconfig")[server_name].setup({
 						capabilities = capabilities,
-						settings = {
-							Lua = {
-								runtime = { version = "Lua 5.1" },
-								diagnostics = {
-									globals = { "vim", "it", "describe", "before_each", "after_each" },
-								},
-							},
-						},
 					})
 				end,
-
-				["pyright"] = function()
-					local lspconfig = require("lspconfig")
-					lspconfig.pyright.setup({
-						capabilities = capabilities
-					})
-				end,
-
-				["html"] = function()
-					require("lspconfig").html.setup({
-						capabilities = capabilities,
-						on_attach = on_attach,
-						filetypes = { "html", "htmldjango", "eruby", "htmlangular" },
-						init_options = {
-							configurationSection = { "html", "css", "javascript" },
-							embeddedLanguages = { css = true, javascript = true },
-							provideFormatter = true,
-						},
-						settings = {
-							html = {
-								format = {
-									wrapAttributes = "force-expand-multiline",
-									wrapLineLength = 0,
-								},
-							},
-						},
-					})
-				end,
-
-				["angularls"] = function()
-					local lspconfig = require("lspconfig")
-
-					-- Mason paths
-					local mason_registry = require("mason-registry")
-					local angularls_path = mason_registry.get_package("angular-language-server"):get_install_path()
-					local global_node_modules = angularls_path .. "/node_modules"
-
-					-- Project node_modules (if exists)
-					local project_root = lspconfig.util.root_pattern("angular.json", "project.json", "nx.json", "package.json",
-						".git")(vim.fn.getcwd()) or vim.fn.getcwd()
-					local project_node_modules = project_root .. "/node_modules"
-
-					-- Probe locations: prefer project, fallback to mason
-					local probe_locations = {}
-					if vim.fn.isdirectory(project_node_modules) == 1 then
-						table.insert(probe_locations, project_node_modules)
-					end
-					table.insert(probe_locations, global_node_modules)
-
-					lspconfig.angularls.setup({
-						capabilities = capabilities,
-						cmd = {
-							"ngserver",
-							"--stdio",
-							"--tsProbeLocations",
-							table.concat(probe_locations, ","),
-							"--ngProbeLocations",
-							table.concat(probe_locations, ","),
-						},
-						root_dir = lspconfig.util.root_pattern("angular.json", "project.json", "nx.json", "package.json", ".git"),
-					})
-				end,
-
 				["lua_ls"] = function()
-					local lspconfig = require("lspconfig")
-					lspconfig.lua_ls.setup({
+					require("lspconfig").lua_ls.setup({
 						capabilities = capabilities,
 						settings = {
 							Lua = {
 								runtime = { version = "Lua 5.1" },
-								diagnostics = {
-									globals = { "vim", "it", "describe", "before_each", "after_each" },
-								},
+								diagnostics = { globals = { "vim" } },
 							},
 						},
 					})
@@ -138,55 +40,45 @@ return {
 			},
 		})
 
-
-		local cmp_select = { behavior = cmp.SelectBehavior.Select }
-
-		cmp.setup({
-			snippet = {
-				expand = function(args)
-					require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
-				end,
+		-- none-ls setup (Prettier)
+		local null_ls = require("null-ls")
+		null_ls.setup({
+			sources = {
+				null_ls.builtins.formatting.prettier, -- enable Prettier
 			},
+		})
+
+		-- Format on save
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			callback = function(args)
+				vim.lsp.buf.format({
+					async = false,
+					bufnr = args.buf,
+				})
+			end,
+		})
+
+		-- cmp setup
+		local cmp_select = { behavior = cmp.SelectBehavior.Select }
+		cmp.setup({
 			mapping = cmp.mapping.preset.insert({
 				["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
 				["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
 				["<C-y>"] = cmp.mapping.confirm({ select = true }),
 				["<C-Space>"] = cmp.mapping.complete(),
-				vim.keymap.set("n", "K", function()
-					vim.lsp.buf.hover()
-				end, { remap = false }),
-				vim.keymap.set("n", "<leader>gi", function()
-					vim.lsp.buf.implementation()
-				end, { remap = false, desc = "Go to implementation" }),
-				vim.keymap.set("n", "<leader>gr", function()
-					vim.lsp.buf.references()
-				end, { remap = false, desc = "Go to references" }),
-				vim.keymap.set("n", "gd", function()
-					vim.lsp.buf.definition()
-				end, { remap = false, desc = "Go to definition" }),
-				vim.keymap.set("n", "<leader>vrn", function()
-					vim.lsp.buf.rename()
-				end, { remap = false }),
-				vim.keymap.set("n", "<leader>vws", function()
-					vim.lsp.buf.workspace_symbol()
-				end, { remap = false }),
-				vim.keymap.set("n", "<leader>vd", function()
-					vim.diagnostic.open_float()
-				end, { remap = false }),
-				vim.keymap.set("n", "<leader>ca", function()
-					vim.lsp.buf.code_action()
-				end, { remap = false }),
+				vim.keymap.set("n", "K", vim.lsp.buf.hover, { remap = false }),
+				vim.keymap.set("n", "gd", vim.lsp.buf.definition, { remap = false, desc = "Go to definition" }),
+				vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { remap = false, desc = "Go to references" }),
+				vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, { remap = false, desc = "Go to implementation" }),
+				vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, { remap = false }),
+				vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, { remap = false }),
+				vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, { remap = false }),
+				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { remap = false }),
 			}),
-			sources = cmp.config.sources({
-				{ name = "nvim_lsp" },
-				{ name = "luasnip" }, -- For luasnip users.
-			}, {
-				{ name = "buffer" },
-			}),
+			sources = cmp.config.sources({ { name = "nvim_lsp" } }),
 		})
 
 		vim.diagnostic.config({
-			-- update_in_insert = true,
 			float = {
 				focusable = false,
 				style = "minimal",

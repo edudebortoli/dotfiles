@@ -22,12 +22,20 @@ function M.json_to_env()
 	local env_lines = {}
 	for _, key in ipairs(keys) do
 		local value = decoded[key]
+
+		-- Convert to string
+		local val = tostring(value)
+
 		-- Remove wrapping single quotes if present
-		local val = tostring(value):gsub("^'(.*)'$", "%1")
+		val = val:gsub("^'(.*)'$", "%1")
+
+		-- Replace any newlines/tabs with spaces to keep .env valid
+		val = val:gsub("[\r\n]+", " ")
+
 		table.insert(env_lines, string.format("%s=%s", key, val))
 	end
 
-	-- Replace buffer content
+	-- Replace buffer content safely
 	vim.api.nvim_buf_set_lines(0, 0, -1, false, env_lines)
 	vim.notify("Converted JSON → ENV (alphabetical)", vim.log.levels.INFO)
 end
