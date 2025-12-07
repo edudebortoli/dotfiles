@@ -1,7 +1,7 @@
 font pango: Bricolage Grotesque Medium
 set $mod Mod4
 workspace_layout default
-new_window pixel 1
+new_window pixel 5
 gaps inner 5
 gaps outer 3
 floating_modifier $mod
@@ -122,7 +122,6 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 bindsym $mod+p exec /usr/local/bin/switch-audio-port
-bindsym $mod+w exec /home/eduardo/.local/bin/zen
 bindsym $mod+n exec /usr/bin/thunar
 bindsym $mod+Return exec kitty 
 

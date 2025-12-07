@@ -5,7 +5,7 @@ return {
 		{ "williamboman/mason-lspconfig.nvim", version = "^1.0.0" },
 		"hrsh7th/nvim-cmp",
 		"hrsh7th/cmp-nvim-lsp",
-		"nvimtools/none-ls.nvim",
+		"nvimtools/none-ls.nvim", 
 	},
 	config = function()
 		local cmp = require("cmp")
@@ -19,7 +19,7 @@ return {
 
 		require("mason").setup()
 		require("mason-lspconfig").setup({
-			ensure_installed = { "lua_ls", "eslint", "html" },
+			ensure_installed = { "lua_ls", "eslint", "tsserver", "html" },
 			handlers = {
 				function(server_name)
 					require("lspconfig")[server_name].setup({
