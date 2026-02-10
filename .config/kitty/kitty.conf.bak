@@ -1,0 +1,13 @@
+#font_family "PlemolJP Console NF"
+font_family "BlexMono Nerd Font light"
+#font_family "Minecraft"
+font-size 06
+font-feature -calt -dlig -liga
+hide_window_decorations yes
+background_opacity 0.9
+
+
+# BEGIN_KITTY_THEME
+# zenbones_dark
+include current-theme.conf
+# END_KITTY_THEME
