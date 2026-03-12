@@ -1,0 +1,67 @@
+/* Configuração da Janela Principal */
+window {
+    margin: 0px;
+    /* Borda sutil para definir o limite, na cor "surface" do Tokyo Night */
+    border: 2px solid #414868; 
+    border-radius: 15px; /* Arredondamento igual ao Waybar */
+    background-color: rgba(26, 27, 38, 0.95); /* Fundo Tokyo Night com leve transparência */
+    font-family: "SpaceMono Nerd Font", "RobotoMono Nerd Font", sans-serif;
+    font-size: 15px;
+}
+
+/* Caixa de Pesquisa */
+#input {
+    margin: 5px;
+    border: none;
+    border-radius: 10px; /* Um pouco menos arredondado que a janela para encaixar dentro */
+    color: #c0caf5; /* Texto Lavanda */
+    background-color: #24283b; /* Um tom um pouco mais claro que o fundo */
+    padding: 10px; /* Mais espaço interno para ficar elegante */
+}
+
+/* Container interno (lista de apps) */
+#inner-box {
+    margin: 5px;
+    border: none;
+    background-color: transparent;
+}
+
+/* Container externo */
+#outer-box {
+    margin: 5px;
+    border: none;
+    background-color: transparent;
+}
+
+/* Área de Rolagem */
+#scroll {
+    margin: 0px;
+    border: none;
+}
+
+/* Texto dos itens da lista */
+#text {
+    margin: 5px;
+    border: none;
+    color: #c0caf5; /* Texto Lavanda */
+}
+
+/* Item da lista (não selecionado) */
+#entry {
+    border: none;
+    border-radius: 10px; /* Arredondamento nos itens da lista */
+    padding: 5px;
+}
+
+/* Item da lista quando SELECIONADO/FOCADO */
+#entry:selected {
+    background-color: #7aa2f7; /* Azul vibrante do Tokyo Night */
+    color: #1a1b26; /* Texto escuro para contraste no fundo azul */
+    font-weight: bold;
+}
+
+/* Opcional: Estilo para ícones, caso você use */
+#img {
+    margin-right: 10px;
+    background-color: transparent;
+}

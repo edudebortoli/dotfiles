@@ -1,31 +1,36 @@
-// -*- mode: jsonc -*-
 {
-  "layer": "top", // Waybar at top layer
-  "position": "top", // Waybar position (top|bottom|left|right)
-  "height": 42, // Waybar height (to be removed for auto height)
-  // "width": 1280, // Waybar width
-  "spacing": 4, // Gaps between modules (4px)
-  // Choose the order of the modules
-  "modules-left": [
-    //"custom/arch",
-    "hyprland/workspaces",
-    "custom/vpn",
-    "tray",
-  ],
-  "modules-center": ["hyprland/window"],
-  "modules-right": [
-    "idle_inhibitor",
-    "pulseaudio",
-    "network",
-    "cpu",
-    "memory",
-    //"temperature",
-    //"hyprland/language",
-    "battery",
-    "battery#bat2",
-    "clock",
-  ],
-  //Modules configuration
+    "layer": "top",
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "height": 32,
+    "margin-top": 0,
+    "margin-left": 0,
+    "margin-right": 0,
+    "spacing": 4,
 
-  "include": ["~/.config/waybar/modules.json"],
+    "modules-left": [
+        "custom/arch",
+        "hyprland/workspaces",
+        "hyprland/window"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+				"hyprland/language",
+				"custom/keyboard_battery",
+        "custom/vpn", 
+        "tray",
+        "cpu",
+        "memory",
+        "pulseaudio",
+        //"network",
+        "battery"
+        //"idle_inhibitor"
+    ],
+
+    "include": ["~/.config/waybar/modules.json"]
 }

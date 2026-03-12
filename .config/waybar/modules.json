@@ -1,9 +1,10 @@
 {
   "custom/arch": {
-    "format": "",
+    "format": "  ",
     "tooltip": true,
-    "tooltip-format": "btw"
+    "tooltip-format": "Arch Linux"
   },
+
   "custom/vpn": {
     "format": "{}",
     "exec": "~/.config/waybar/scripts/vpn-status.sh",
@@ -12,88 +13,50 @@
     "on-click": "forticlient gui",
     "tooltip": true
   },
+
   "hyprland/workspaces": {
     "disable-scroll": true,
     "all-outputs": true,
-    "warp-on-scroll": false,
-    "format": "{name}",
-    "format-icons": {
-      "urgent": "",
-      "active": "",
-      "default": ""
-    }
-  },
-  "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
-      "activated": "",
-      "deactivated": ""
+      "active": "●",
+      "default": "○",
+      "urgent": "󰀦"
     }
   },
+
   "pulseaudio": {
-    "format": "{icon}  {volume}%",
-    "format-bluetooth": "{icon} {volume}%  {format_source}",
-    "format-bluetooth-muted": "{icon} {format_source}",
-    "format-muted": "{format_source}",
-    "format-source": " {volume}%",
-    "format-source-muted": "",
+    "format": "{icon} {volume}%",
+    "format-muted": "󰝟",
     "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
-      "default": ["", "", ""]
+      "default": ["󰕿", "󰖀", "󰕾"]
     },
     "on-click": "pavucontrol"
   },
-  "network": {
-    "format-wifi": "   {essid} ({signalStrength}%)",
-    "format-ethernet": "{ipaddr}/{cidr}",
-    "tooltip-format": "{ifname} via {gwaddr}",
-    "format-linked": "{ifname} (No IP)",
-    "format-disconnected": "Disconnected ⚠",
-    "on-click": "sh ~/scripts/rofi-wifi-menu/rofi-wifi-menu.sh"
-  },
-  "cpu": {
-    "format": "  {usage}%",
-    "tooltip": true
-  },
-  "memory": {
-    "format": "  {}%",
-    "tooltip": true
-  },
-  "temperature": {
-    "interval": 10,
-    "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input",
-    "critical-threshold": 100,
-    "format-critical": " {temperatureC}",
-    "format": " {temperatureC}°C"
-  },
-  "hyprland/language": {
-    "format": "  {}",
-    "format-en": "EN",
-    "format-pt": "PT"
-  },
+
   "battery": {
-    "states": {
-      "warning": 30,
-      "critical": 15
-    },
-    "format": "{icon}  {capacity}%",
-    "format-full": "{icon}  {capacity}%",
-    "format-charging": "  {capacity}%",
-    "format-plugged": "  {capacity}%",
-    "format-alt": "{time}  {icon}",
-    "format-icons": ["", "", "", "", ""]
+    "states": { "warning": 30, "critical": 15 },
+    "format": "{icon} {capacity}%",
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
   },
-  "battery#bat2": {
-    "bat": "BAT2"
-  },
+
   "clock": {
-    "format": "{:%H:%M | %e %B} ",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format-alt": "{:%Y-%m-%d}"
+    "format": "{:%a %b %d  %H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+
+  "cpu": { "format": "󰻠 {usage}%" },
+  "memory": { "format": "󰍛 {percentage}%" },
+  "hyprland/language": {
+    "format": "{}",
+    "format-en": "US (Code)",
+    "format-en-intl": "US-Intl (Writing)"
+  },
+  "custom/keyboard_battery": {
+    "exec": "~/.config/waybar/scripts/kb-battery.sh",
+    "return-type": "json",
+    "interval": 30,
+    "format": "{}",
+    "tooltip": true
   }
 }

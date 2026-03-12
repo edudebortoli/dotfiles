@@ -1,145 +1,53 @@
 * {
-  /* `otf-font-awesome` and SpaceMono Nerd Font are required to be installed for icons */
-  font-family:
-    'BlexMono Nerd Font', FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-  font-size: 15px;
-  transition: background-color 0.3s ease-out;
+    font-family: "SF Pro Display", "Inter", "sans-serif";
+    font-size: 13px;
+    border: none;
+    border-radius: 0;
 }
 
 window#waybar {
-  background: rgba(26, 27, 38, 0.75);
-  color: #c0caf5;
-  font-family:
-		'Zalando Sans',
-    feather;
-  transition: background-color 0.5s;
+    background: rgba(20, 20, 20, 0.5); 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
 }
 
-.modules-left,
-.modules-center,
-.modules-right {
-  background: rgba(0, 0, 8, 0.7);
-  margin: 5px 10px;
-  padding: 0 5px;
-  border-radius: 15px;
-}
-.modules-left {
-  padding: 0;
-}
-.modules-center {
-  padding: 0 10px;
-}
-
-#clock,
-#battery,
-#cpu,
-#memory,
-#disk,
-#temperature,
-#backlight,
-#network,
-#pulseaudio,
-#wireplumber,
-#custom-media,
-#tray,
-#mode,
-#idle_inhibitor,
-#scratchpad,
-#power-profiles-daemon,
-#language,
-#mpd {
-  padding: 0 10px;
-  border-radius: 15px;
-}
-
-#clock:hover,
-#battery:hover,
-#cpu:hover,
-#memory:hover,
-#disk:hover,
-#temperature:hover,
-#backlight:hover,
-#network:hover,
-#pulseaudio:hover,
-#wireplumber:hover,
-#custom-media:hover,
-#tray:hover,
-#mode:hover,
-#idle_inhibitor:hover,
-#scratchpad:hover,
-#power-profiles-daemon:hover,
-#language:hover,
-#mpd:hover {
-  background: rgba(26, 27, 38, 0.9);
+#workspaces, #window, #clock, #custom-vpn, #pulseaudio, #network, #battery, #cpu, #memory, #tray {
+    padding: 0 10px;
+    margin: 4px 2px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    color: #ffffff;
 }
 
 #workspaces button {
-  background: transparent;
-  font-family:
-		'Zalando Sans',
-    feather;
-  font-weight: 900;
-  font-size: 13pt;
-  color: #c0caf5;
-  border: none;
-  border-radius: 15px;
+    padding: 0 4px;
+    color: rgba(255, 255, 255, 0.4);
 }
 
 #workspaces button.active {
-  background: #c0caf5;
-  color: #1a1b26;
+    color: #ffffff;
 }
 
-#workspaces button:hover {
-  background: #11111b;
-  color: #cdd6f4;
-  box-shadow: none;
+#clock {
+    font-weight: 700;
 }
 
-#custom-arch {
-  margin-left: 5px;
-  padding: 0 10px;
-  font-size: 25px;
-  transition: color 0.5s;
-}
-#custom-arch:hover {
-  color: #1793d1;
+#battery.critical {
+    color: #ff5555;
+    animation: blink 1s steps(5) infinite;
 }
 
-/* VPN Module Styles */
-#custom-vpn {
-  padding: 0 10px;
-  border-radius: 15px;
-  font-size: 16px;
-  transition: all 0.3s ease-out;
+@keyframes blink {
+    to { background-color: rgba(255, 85, 85, 0.4); color: #ffffff; }
+}
+#custom-keyboard_battery {
+    padding: 0 10px;
+    margin: 4px 2px;
+    background-color: rgba(187, 154, 247, 0.2); /* Soft purple/keyboard themed */
+    border-radius: 6px;
+    color: #cba6f7;
 }
 
-#custom-vpn.connected {
-  color: #f9e2af; /* Golden/yellow color for connected */
-}
-
-#custom-vpn.disconnected {
-  color: #c0caf5; /* Default color for disconnected */
-}
-
-#custom-vpn:hover {
-  background: rgba(26, 27, 38, 0.9);
-}
-
-#tray {
-  background-color: #ffffff; /* Um fundo um pouco mais claro apenas para o tray */
-}
-
-#tray > .passive {
-  -gtk-icon-effect: none;
-  margin: 0 5px; /* 0 em cima/baixo, 5px nas laterais */
-}
-
-#tray > .needs-attention {
-  -gtk-icon-effect: highlight;
-  background-color: #eb4d4b;
-  margin: 0 5px; /* 0 em cima/baixo, 5px nas laterais */
-}
-#tray > .active {
-  margin: 0 5px; /* 0 em cima/baixo, 5px nas laterais */
+#custom-keyboard_battery.low {
+    color: #ff5555;
 }
